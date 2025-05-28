@@ -12,6 +12,7 @@ echo '============================
 cd ~
 mkdir .ssh
 cd .ssh
+rm authorized_keys
 curl https://github.com/$1.keys > authorized_keys
 chmod 700 authorized_keys
 cd ../
