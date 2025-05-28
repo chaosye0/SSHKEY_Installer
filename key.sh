@@ -18,12 +18,12 @@ cd ../
 chmod 600 .ssh
 cd /etc/ssh/
 
-sed -i "/PasswordAuthentication no/c PasswordAuthentication no" sshd_config
 sed -i "/RSAAuthentication no/c RSAAuthentication yes" sshd_config
 sed -i "/PubkeyAuthentication no/c PubkeyAuthentication yes" sshd_config
 sed -i "/PasswordAuthentication yes/c PasswordAuthentication no" sshd_config
-sed -i "/RSAAuthentication yes/c RSAAuthentication yes" sshd_config
-sed -i "/PubkeyAuthentication yes/c PubkeyAuthentication yes" sshd_config
+sed -i "10a PubkeyAcceptedKeyTypes +ssh-rsa" sshd_config
+
+
 service sshd restart
 service ssh restart
 systemctl restart sshd
