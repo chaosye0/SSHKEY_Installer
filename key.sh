@@ -6,8 +6,7 @@ yum make cache
 yum install curl -y
 echo '============================
       SSH Key Installer
-	 V1.0 Alpha
-	Author:Kirito
+usage: bash key.sh [your Github username]  
 ============================'
 cd ~
 mkdir -p .ssh
@@ -19,11 +18,10 @@ cd ../
 chmod 600 .ssh
 cd /etc/ssh/
 
-sed -i "/RSAAuthentication no/c RSAAuthentication yes" sshd_config
-sed -i "/PubkeyAuthentication no/c PubkeyAuthentication yes" sshd_config
-sed -i "/PasswordAuthentication yes/c PasswordAuthentication no" sshd_config
-sed -i "10a PubkeyAcceptedKeyTypes +ssh-rsa" sshd_config
-
+sed -i '/^#*RSAAuthentication/s/^#*RSAAuthentication.*/RSAAuthentication yes/; t; $a RSAAuthentication yes' /etc/ssh/sshd_config
+sed -i '/^#*PubkeyAuthentication/s/^#*PubkeyAuthentication.*/PubkeyAuthentication yes/; t; $a PubkeyAuthentication yes' /etc/ssh/sshd_config
+sed -i '/^#*PasswordAuthentication/s/^#*PasswordAuthentication.*/PasswordAuthentication no/; t; $a PasswordAuthentication no' /etc/ssh/sshd_config
+sed -i '/^#*PubkeyAcceptedKeyTypes/s/^#*PubkeyAcceptedKeyTypes.*/PubkeyAcceptedKeyTypes +ssh-rsa/; t; $a PubkeyAcceptedKeyTypes +ssh-rsa' /etc/ssh/sshd_config
 
 service sshd restart
 service ssh restart
