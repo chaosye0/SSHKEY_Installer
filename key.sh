@@ -22,6 +22,7 @@ sed -i '/^#*RSAAuthentication/s/^#*RSAAuthentication.*/RSAAuthentication yes/; t
 sed -i '/^#*PubkeyAuthentication/s/^#*PubkeyAuthentication.*/PubkeyAuthentication yes/; t; $a PubkeyAuthentication yes' /etc/ssh/sshd_config
 sed -i '/^#*PasswordAuthentication/s/^#*PasswordAuthentication.*/PasswordAuthentication no/; t; $a PasswordAuthentication no' /etc/ssh/sshd_config
 sed -i '/^#*PubkeyAcceptedKeyTypes/s/^#*PubkeyAcceptedKeyTypes.*/PubkeyAcceptedKeyTypes +ssh-rsa/; t; $a PubkeyAcceptedKeyTypes +ssh-rsa' /etc/ssh/sshd_config
+sed -i '/^#*Port/s/^#*Port.*/Port 22922/; t; $a Port 22922' /etc/ssh/sshd_config
 
 service sshd restart
 service ssh restart
